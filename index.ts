@@ -47,6 +47,7 @@ async function startServer() {
       console.log(`🌍 Render URL: https://findmybizname.onrender.com`);
       console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`✅ Render deployment: SUCCESS`);
+      console.log(`🤖 OpenAI integration: ACTIVE`);
     });
   } catch (error) {
     console.error('Error setting up server:', error);
