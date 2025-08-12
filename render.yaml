@@ -1,3 +1,4 @@
+
 services:
   - type: web
     name: findmybizname
@@ -5,7 +6,7 @@ services:
     plan: free
     runtime: node
     nodeVersion: "20"
-    buildCommand: yarn install && yarn run build
+    buildCommand: yarn install && yarn build
     startCommand: yarn start
     envVars:
       - key: NODE_ENV
@@ -21,6 +22,14 @@ services:
       - key: PAYPAL_CLIENT_ID
         sync: false
       - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: GODADDY_API_KEY
+        sync: false
+      - key: GODADDY_API_SECRET
+        sync: false
+      - key: SENDGRID_API_KEY
+        sync: false
+      - key: COINBASE_COMMERCE_API_KEY
         sync: false
 
 databases:
