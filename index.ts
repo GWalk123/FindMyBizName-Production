@@ -10,14 +10,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// API health check for Render
+// API health check for Railway
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'ok', 
     platform: 'FindMyBizName - Complete Business Operating System',
     environment: process.env.NODE_ENV || 'development',
     timestamp: new Date().toISOString(),
-    market: '430.5M underbanked entrepreneurs globally',
     features: [
       'AI Business Naming Engine',
       'Real-time Domain Checking',
@@ -57,9 +56,9 @@ app.get('/api/status', (req, res) => {
 // Setup Vite for development or serve static for production  
 const isProduction = process.env.NODE_ENV === "production";
 
-// Render assigns PORT environment variable in production
-const port = parseInt(process.env.PORT || "5000", 10);
-const host = "0.0.0.0";
+// Use different ports for dev/prod to avoid conflicts
+const port = parseInt(process.env.PORT || "3000", 10);
+const host = "0.0.0.0"; // Render requires 0.0.0.0
 
 async function startServer() {
   try {
@@ -77,7 +76,7 @@ async function startServer() {
       console.log(`🌍 Render URL: https://findmybizname.onrender.com`);
       console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`✅ Render deployment: SUCCESS`);
-      console.log(`🤖 OpenAI integration: ACTIVE`);
+      console.log(`🤖 OpenAI integration: ${process.env.OPENAI_API_KEY ? 'ACTIVE' : 'PENDING'}`);
     });
   } catch (error) {
     console.error('Error setting up server:', error);
