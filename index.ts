@@ -16,13 +16,43 @@ app.get('/api/health', (req, res) => {
     status: 'ok', 
     platform: 'FindMyBizName - Complete Business Operating System',
     environment: process.env.NODE_ENV || 'development',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    market: '430.5M underbanked entrepreneurs globally',
+    features: [
+      'AI Business Naming Engine',
+      'Real-time Domain Checking',
+      'Global Payment Processing',
+      'Complete CRM System',
+      '30% Referral Network',
+      'Business Intelligence Suite',
+      'Digital Products Marketplace'
+    ]
   });
 });
 
 // Basic middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Platform status API
+app.get('/api/status', (req, res) => {
+  res.json({
+    platform: 'FindMyBizName',
+    status: 'LIVE',
+    market: '430.5M underbanked entrepreneurs',
+    positioning: 'The First Complete Global Business Operating System for Underbanked Entrepreneurs',
+    features: {
+      'AI Naming': 'Active',
+      'Domain Checking': 'Active', 
+      'CRM': 'Active',
+      'Invoicing': 'Active',
+      'Referrals': 'Active',
+      'Business Intelligence': 'Active',
+      'Digital Products': 'Active',
+      'Alternative Payments': 'Active'
+    }
+  });
+});
 
 // Setup Vite for development or serve static for production  
 const isProduction = process.env.NODE_ENV === "production";
