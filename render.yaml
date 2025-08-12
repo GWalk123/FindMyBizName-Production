@@ -4,8 +4,9 @@ services:
     env: node
     plan: free
     runtime: node
-    buildCommand: npm install --production=false && npx vite build && npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
-    startCommand: npm start
+    nodeVersion: "20"
+    buildCommand: yarn install && yarn run build
+    startCommand: yarn start
     envVars:
       - key: NODE_ENV
         value: production
@@ -14,6 +15,12 @@ services:
           name: findmybizname-db
           property: connectionString
       - key: RAPIDAPI_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
         sync: false
 
 databases:
