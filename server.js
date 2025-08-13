@@ -1,43 +1,33 @@
-import fs from 'fs';
-import path from 'path';
-
-// Copy server files to dist
-const serverFiles = ['server/index.ts', 'shared/schema.ts'];
-const distDir = 'dist';
-
-if (!fs.existsSync(distDir)) {
-  fs.mkdirSync(distDir, { recursive: true });
-}
-
-// Simple server bundle for production
-const serverCode = `
-import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+const express = require('express');
+const path = require('path');
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  res.json({ 
+    status: 'ok', 
+    platform: 'FindMyBizName - Complete Business Operating System',
+    market: '430.5M underbanked entrepreneurs'
+  });
 });
 
-// Catch-all handler for SPA
+app.get('/api/status', (req, res) => {
+  res.json({
+    platform: 'FindMyBizName',
+    status: 'LIVE',
+    positioning: 'The First Complete Global Business Operating System for Underbanked Entrepreneurs'
+  });
+});
+
+app.use(express.static(path.join(__dirname, 'dist')));
+
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'index.html'));
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(\`🌍 FindMyBizName running on port ${PORT}\`);
+  console.log('FindMyBizName server running on port', PORT);
 });
-`;
-
-fs.writeFileSync(path.join(distDir, 'server.js'), serverCode);
-console.log('✅ Server bundle created');
