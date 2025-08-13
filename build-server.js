@@ -9,6 +9,22 @@ console.log('📦 Building server bundle...');
 
 // Read the server entry point
 const serverPath = path.join(__dirname, 'server', 'index.ts');
+console.log('📁 Looking for server file at:', serverPath);
+
+// Check if file exists
+if (!fs.existsSync(serverPath)) {
+  console.error('❌ Server file not found at:', serverPath);
+  console.log('📁 Available files in server directory:');
+  try {
+    const serverDir = path.join(__dirname, 'server');
+    const files = fs.readdirSync(serverDir);
+    console.log(files);
+  } catch (e) {
+    console.error('❌ Cannot read server directory:', e.message);
+  }
+  process.exit(1);
+}
+
 let serverContent = fs.readFileSync(serverPath, 'utf8');
 
 // Replace TypeScript imports with CommonJS requires for production
