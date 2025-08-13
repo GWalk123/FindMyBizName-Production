@@ -5,8 +5,8 @@ services:
     plan: free
     runtime: node
     nodeVersion: "20"
-    buildCommand: yarn install && yarn run build
-    startCommand: yarn start
+    buildCommand: npm install && npm run build
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
