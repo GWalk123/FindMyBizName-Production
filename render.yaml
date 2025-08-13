@@ -6,13 +6,7 @@ services:
     runtime: node
     nodeVersion: "20"
     buildCommand: npm install
-    startCommand: node app.js
+    startCommand: node server.js
     envVars:
       - key: NODE_ENV
         value: production
-
-databases:
-  - name: findmybizname-db
-    databaseName: findmybizname
-    user: findmybizname
-    plan: free
