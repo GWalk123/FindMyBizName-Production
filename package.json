@@ -1,15 +1,14 @@
 {
   "name": "findmybizname-platform",
-  "version": "2.0.0",
-  "description": "Complete Business Operating System for 430.5M Underbanked Entrepreneurs",
+  "version": "1.0.0",
+  "description": "Complete business operating system for 430.5M underbanked entrepreneurs globally",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build": "echo 'Production build complete'",
     "dev": "node index.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.21.2"
   },
   "engines": {
     "node": ">=18.0.0"
