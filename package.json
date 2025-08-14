@@ -4,7 +4,8 @@
   "description": "Complete Business Operating System for Underbanked Entrepreneurs",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "echo 'No build needed - single file deployment'"
   },
   "engines": {
     "node": ">=18.0.0"
