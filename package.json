@@ -1,15 +1,12 @@
 {
-  "name": "findmybizname",
-  "version": "1.0.0",
-  "description": "Complete Business Operating System for Underbanked Entrepreneurs",
+  "name": "findmybizname-platform",
+  "version": "2.0.0", 
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "build": "echo 'No build needed - single file deployment'"
+    "start": "NODE_ENV=production node index.js"
   },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "author": "FindMyBizName",
-  "license": "MIT"
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
