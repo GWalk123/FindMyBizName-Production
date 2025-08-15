@@ -1,6 +1,7 @@
 {
   "name": "findmybizname",
   "version": "2.0.0",
+  "description": "Complete Business Operating System for 430.5M Underbanked Entrepreneurs",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -10,5 +11,16 @@
   },
   "engines": {
     "node": "20.x"
-  }
+  },
+  "keywords": [
+    "business",
+    "entrepreneur", 
+    "fintech",
+    "underbanked",
+    "caribbean",
+    "ai",
+    "crm",
+    "pricegate",
+    "stripegate"
+  ]
 }
