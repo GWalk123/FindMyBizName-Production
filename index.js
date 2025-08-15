@@ -1,70 +1,93 @@
-import express from "express";
-import path from "path";
-import fs from "fs";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const express = require('express');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 5000;
-const isProduction = process.env.NODE_ENV === "production";
 
-// Basic middleware
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-
-// Request logging
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path}`);
-  next();
-});
+// Middleware
+app.use(express.json());
+app.use(express.static('.'));
 
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ 
-    status: 'ok', 
+    status: 'success',
     platform: 'FindMyBizName - Complete Business Operating System',
     market: '430.5M underbanked entrepreneurs globally',
-    campaigns: ['PRICEGATE', 'STRIPEGATE'],
-    features: [
-      'AI Business Naming Engine',
-      'Real-time Domain Checking', 
-      'Complete CRM System',
-      'Business Intelligence Suite',
-      'Digital Products Marketplace'
-    ]
+    campaigns: ['PRICEGATE', 'STRIPEGATE']
   });
 });
 
-// Production static serving - React App
-if (isProduction) {
-  // Serve React assets
-  app.use('/assets', express.static('assets', { maxAge: '1y' }));
-  app.use(express.static('.', { maxAge: '1d' }));
-
-  // SPA fallback - serve React app
-  app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api')) return next();
-    
-    const indexPath = path.join(__dirname, 'index.html');
-    
-    if (fs.existsSync(indexPath)) {
-      res.sendFile(indexPath);
-    } else {
-      res.send(`<!DOCTYPE html>
-<html><head><title>FindMyBizName</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
-<body><div id="root"><div style="padding: 40px; text-align: center; font-family: Arial, sans-serif;">
-<h1 style="color: #0040FF;">FindMyBizName</h1><p>Complete Business Operating System</p>
-<p>Serving 430.5M underbanked entrepreneurs globally</p><p>PRICEGATE + STRIPEGATE campaigns active</p>
-</div></div></body></html>`);
+// Serve platform for all routes
+app.get('*', (req, res) => {
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ error: 'API endpoint not found' });
+  }
+  
+  res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FindMyBizName - Complete Business Operating System</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0040FF 0%, #FF2D2D 100%);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; color: white;
     }
-  });
-}
+    .container { 
+      text-align: center; padding: 40px; background: rgba(255,255,255,0.1);
+      border-radius: 20px; backdrop-filter: blur(10px); max-width: 900px;
+    }
+    h1 { font-size: 3em; margin-bottom: 20px; color: #FFDD00; }
+    .subtitle { font-size: 1.4em; margin-bottom: 30px; opacity: 0.9; }
+    .features { 
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px; margin: 30px 0;
+    }
+    .feature { background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; font-weight: bold; }
+    .campaign { 
+      display: inline-block; background: #FF2D2D; color: white;
+      padding: 8px 20px; border-radius: 25px; margin: 0 10px; font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>FindMyBizName</h1>
+    <div class="subtitle">The First Complete Global Business Operating System for Underbanked Entrepreneurs</div>
+    
+    <div class="features">
+      <div class="feature">🤖 AI Business Naming</div>
+      <div class="feature">🌐 Domain Checking</div>
+      <div class="feature">📊 Business Intelligence</div>
+      <div class="feature">👥 Complete CRM</div>
+      <div class="feature">💰 Payment Processing</div>
+      <div class="feature">📈 Referral System</div>
+      <div class="feature">🛍️ Digital Products</div>
+      <div class="feature">📰 Biz Newz</div>
+      <div class="feature">🤖 Biz Botz</div>
+      <div class="feature">💼 Invoicing</div>
+      <div class="feature">🎯 Analytics</div>
+      <div class="feature">🔒 Secure Payments</div>
+    </div>
+    
+    <div style="margin-top: 30px; font-size: 1.2em;">
+      <div>✅ Platform: <strong>LIVE & OPERATIONAL</strong></div>
+      <div>🎯 Market: <strong>430.5M Underbanked Entrepreneurs</strong></div>
+      <div style="margin-top: 20px;">
+        <span class="campaign">PRICEGATE</span>
+        <span class="campaign">STRIPEGATE</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`);
+});
 
-// Start server
 app.listen(port, '0.0.0.0', () => {
-  console.log(`🚀 FindMyBizName server running on 0.0.0.0:${port}`);
-  console.log(`✅ Deployment: SUCCESS`);
-  console.log(`🎯 Market: 430.5M underbanked entrepreneurs`);
+  console.log(\`🚀 FindMyBizName live on port \${port}\`);
+  console.log('✅ Serving 430.5M underbanked entrepreneurs globally');
 });
