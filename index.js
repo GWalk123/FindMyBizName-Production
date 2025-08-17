@@ -173,31 +173,6 @@ app.get('/', (req, res) => {
             margin: 0 auto;
             padding: 20px;
         }
-        .hero-section {
-            background: rgba(0,0,0,0.3);
-            padding: 50px 40px;
-            border-radius: 20px;
-            text-align: center;
-            margin: 30px 0;
-            backdrop-filter: blur(10px);
-        }
-        .hero-title {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-        .hero-subtitle {
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            color: #FFDD00;
-        }
-        .hero-description {
-            font-size: 1.1em;
-            margin-bottom: 30px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
         .activation-panel {
             background: rgba(255,255,255,0.1);
             padding: 30px;
@@ -257,47 +232,8 @@ app.get('/', (req, res) => {
             background: ${apiStatus === 'ACTIVATED' ? '#00FF00' : '#FF6600'};
             color: #000;
         }
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-        .tool-card {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 18px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .tool-card:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .tool-icon {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            display: block;
-        }
-        .tool-title {
-            font-size: 1.4em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #FFDD00;
-        }
-        .tool-description {
-            font-size: 1em;
-            line-height: 1.5;
-            opacity: 0.9;
-        }
         @media (max-width: 768px) {
-            .tools-grid { grid-template-columns: 1fr; }
             .container { padding: 15px; }
-            .hero-title { font-size: 2em; }
             .logo { font-size: 2.2em; }
             .cta-buttons { flex-direction: column; align-items: center; }
             .feature-status { grid-template-columns: 1fr; }
@@ -345,116 +281,6 @@ app.get('/', (req, res) => {
                 <button class="cta-button test-button" onclick="testDomainChecker()">
                     ${apiStatus === 'ACTIVATED' ? 'Test Domain Checker' : 'Testing Available Soon'}
                 </button>
-                <button class="cta-button" onclick="viewAllTools()">View All 16 Tools</button>
-            </div>
-        </section>
-        
-        <section class="hero-section">
-            <h2 class="hero-title">Complete Business Operating System</h2>
-            <h3 class="hero-subtitle">Everything You Need to Start, Run & Grow Your Business</h3>
-            <p class="hero-description">
-                The world's first complete business operating system designed specifically for underbanked entrepreneurs. 
-                From AI-powered business naming to payment processing, CRM, and beyond - all in one platform.
-            </p>
-        </section>
-        
-        <section class="tools-section">
-            <div class="tools-grid">
-                <article class="tool-card">
-                    <span class="tool-icon">🧠</span>
-                    <h4 class="tool-title">AI Business Name Generator</h4>
-                    <p class="tool-description">Advanced AI algorithms generate unique, brandable business names with trademark checking and domain availability.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">🌐</span>
-                    <h4 class="tool-title">Live Domain Checker</h4>
-                    <p class="tool-description">Real-time domain availability checking across 500+ TLDs with instant registration and pricing information.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">📊</span>
-                    <h4 class="tool-title">Brand Analysis Suite</h4>
-                    <p class="tool-description">Social media handle checking, brand sentiment analysis, pronunciation scoring, and SEO optimization.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">🔍</span>
-                    <h4 class="tool-title">Business Intelligence Platform</h4>
-                    <p class="tool-description">SEC EDGAR database with 500K+ companies, market research, competitive analysis, and trending insights.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">👥</span>
-                    <h4 class="tool-title">Customer CRM System</h4>
-                    <p class="tool-description">Complete customer relationship management with contact tracking, automated follow-up, and sales pipeline.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">📄</span>
-                    <h4 class="tool-title">Professional Invoicing</h4>
-                    <p class="tool-description">Create professional invoices with automated calculations, tax handling, and multi-currency support.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">💳</span>
-                    <h4 class="tool-title">Global Payment Processing</h4>
-                    <p class="tool-description">PayPal, Coinbase Commerce, and regional payment processing designed for underbanked markets.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">📰</span>
-                    <h4 class="tool-title">Business News Feed</h4>
-                    <p class="tool-description">Curated business news with industry filtering, trend analysis, and personalized recommendations.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">🤖</span>
-                    <h4 class="tool-title">AI Customer Support</h4>
-                    <p class="tool-description">AI-powered customer support with specialized bots for business advice, technical help, and growth strategies.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">💬</span>
-                    <h4 class="tool-title">Global Community Forum</h4>
-                    <p class="tool-description">Entrepreneur networking forum with regional channels, collaboration tools, and mentorship programs.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">📋</span>
-                    <h4 class="tool-title">AI Business Templates</h4>
-                    <p class="tool-description">Business plan templates, legal documents, and operational guides with AI customization for your industry.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">🛍️</span>
-                    <h4 class="tool-title">Digital Products Marketplace</h4>
-                    <p class="tool-description">Instant download business resources: financial trackers, brand guidelines, legal templates, and productivity tools.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">🎯</span>
-                    <h4 class="tool-title">Global Referral System</h4>
-                    <p class="tool-description">Earn 30% recurring commissions by referring entrepreneurs with automated tracking and global payment infrastructure.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">📈</span>
-                    <h4 class="tool-title">Business Analytics Dashboard</h4>
-                    <p class="tool-description">Comprehensive business metrics, customer insights, growth opportunities, and actionable performance recommendations.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">🪙</span>
-                    <h4 class="tool-title">Alternative Payment Systems</h4>
-                    <p class="tool-description">Cryptocurrency payments, mobile money integration, and cash-based solutions for underbanked markets worldwide.</p>
-                </article>
-                
-                <article class="tool-card">
-                    <span class="tool-icon">👤</span>
-                    <h4 class="tool-title">Professional Business Profile</h4>
-                    <p class="tool-description">Create professional business profiles with networking capabilities and access to global entrepreneur directory.</p>
-                </article>
             </div>
         </section>
     </div>
@@ -485,15 +311,6 @@ app.get('/', (req, res) => {
                 'API Configuration Needed: ' + data.message
             );
         }
-        
-        function viewAllTools() {
-            alert('All 16 business tools are integrated and ready. API activation in progress!');
-        }
-        
-        // Analytics and tracking
-        console.log('FindMyBizName Platform Loaded - v4.1.0');
-        console.log('API Status: ${apiStatus}');
-        console.log('Platform Status: OPERATIONAL');
     </script>
 </body>
 </html>
