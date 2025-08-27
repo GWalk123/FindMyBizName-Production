@@ -1,11 +1,14 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  plugins: [react()],
-  root: 'client',
+  // Specify the root directory for your project
+  root: 'client', // Adjust this if your client files are located in a different folder
   build: {
-    outDir: '../dist/public',
-    emptyOutDir: true,
+    outDir: '../dist', // Specify the output directory relative to the root
+    rollupOptions: {
+      input: {
+        main: 'client/index.html', // Adjust this to point to your main HTML file
+      },
+    },
   },
 });
