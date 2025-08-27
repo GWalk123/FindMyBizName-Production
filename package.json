@@ -1,5 +1,0 @@
-{
-  "engines": {"node": "20.19.3"},
-  "scripts": {"build": "vite build && esbuild server/index.ts..."},
-  "dependencies": {"vite": "^5.4.19", "esbuild": "^0.25.0", ...}
-}
