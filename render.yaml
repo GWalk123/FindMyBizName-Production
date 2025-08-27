@@ -1,5 +1,0 @@
-services:
-  - type: web
-    runtime: node
-    buildCommand: npm ci && npm run build
-    # NO nodeVersion field (not supported)
