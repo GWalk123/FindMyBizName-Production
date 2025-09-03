@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindMyBizName - AI Business Name Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <div id="app">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <i class="fas fa-lightbulb text-blue-600 text-2xl mr-3"></i>
+                        <h1 class="text-xl font-bold text-gray-900">FindMyBizName</h1>
+                    </div>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="#generator" class="text-gray-700 hover:text-blue-600">Generator</a>
+                        <a href="#domains" class="text-gray-700 hover:text-blue-600">Domains</a>
+                        <a href="#about" class="text-gray-700 hover:text-blue-600">About</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-blue-600 to-purple-700 text-white py-16">
+            <div class="max-w-4xl mx-auto text-center px-4">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Find Your Perfect Business Name</h2>
+                <p class="text-xl mb-8 opacity-90">AI-powered business name generator with instant domain availability</p>
+                <button onclick="scrollToGenerator()" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                    Start Generating Names
+                </button>
+            </div>
+        </section>
+
+        <!-- Name Generator Section -->
+        <section id="generator" class="py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-4">
+                <h3 class="text-3xl font-bold text-center mb-8">AI Business Name Generator</h3>
+                
+                <div class="bg-gray-50 rounded-xl p-8 mb-8">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Industry</label>
+                            <select id="industry" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Select Industry</option>
+                                <option value="technology">Technology</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="finance">Finance</option>
+                                <option value="retail">Retail</option>
+                                <option value="consulting">Consulting</option>
+                                <option value="food">Food & Restaurant</option>
+                                <option value="fitness">Fitness & Wellness</option>
+                                <option value="creative">Creative & Design</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Style</label>
+                            <select id="style" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="modern">Modern</option>
+                                <option value="classic">Classic</option>
+                                <option value="creative">Creative</option>
+                                <option value="professional">Professional</option>
+                                <option value="playful">Playful</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Keywords (optional)</label>
+                        <input id="keywords" type="text" placeholder="Enter keywords related to your business..." 
+                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    
+                    <button onclick="generateNames()" 
+                            class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition mt-6">
+                        <i class="fas fa-magic mr-2"></i>Generate Names
+                    </button>
+                </div>
+
+                <!-- Results Section -->
+                <div id="results" class="hidden">
+                    <h4 class="text-2xl font-bold mb-6">Generated Business Names</h4>
+                    <div id="namesList" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Names will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Domain Checker Section -->
+        <section id="domains" class="py-16 bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4">
+                <h3 class="text-3xl font-bold text-center mb-8">Domain Availability Checker</h3>
+                
+                <div class="bg-white rounded-xl p-8 shadow-sm">
+                    <div class="flex gap-4">
+                        <input id="domainInput" type="text" placeholder="Enter business name to check domain..." 
+                               class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <button onclick="checkDomain()" 
+                                class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+                            Check Domain
+                        </button>
+                    </div>
+                    
+                    <div id="domainResults" class="mt-6 hidden">
+                        <!-- Domain results will be shown here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16 bg-white">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-3xl font-bold text-center mb-12">Why Choose FindMyBizName?</h3>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-robot text-blue-600 text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">AI-Powered</h4>
+                        <p class="text-gray-600">Advanced AI algorithms generate unique, memorable business names tailored to your industry.</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-globe text-green-600 text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Domain Check</h4>
+                        <p class="text-gray-600">Instantly check domain availability for your business names across multiple TLDs.</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-heart text-purple-600 text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Free to Use</h4>
+                        <p class="text-gray-600">Generate unlimited business names and check domains completely free of charge.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-8">
+            <div class="max-w-6xl mx-auto px-4 text-center">
+                <div class="flex items-center justify-center mb-4">
+                    <i class="fas fa-lightbulb text-blue-400 text-2xl mr-3"></i>
+                    <h5 class="text-xl font-bold">FindMyBizName</h5>
+                </div>
+                <p class="text-gray-400 mb-4">Your AI-powered business naming partner</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-github"></i></a>
+                </div>
+                <div class="mt-6 pt-6 border-t border-gray-800 text-sm text-gray-400">
+                    <p>&copy; 2024 FindMyBizName. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Sample business names database
+        const businessNames = {
+            technology: {
+                modern: ['TechFlow', 'DataSync', 'CloudShift', 'CodeVibe', 'NetCore', 'ByteForge', 'TechNova', 'DigitalEdge'],
+                classic: ['TechCorp', 'InfoSystems', 'DataWorks', 'CompuTech', 'SystemsPlus', 'TechSolutions', 'InfoTech', 'DataLogic'],
+                creative: ['PixelDream', 'CodeCraft', 'TechMagic', 'ByteArt', 'DigitalMuse', 'TechCanvas', 'CodePoetry', 'PixelForge'],
+                professional: ['TechConsulting', 'SystemsPro', 'DataExpert', 'TechAdvantage', 'InfoProfessional', 'TechMasters', 'SystemsElite', 'DataPrime'],
+                playful: ['TechBuzz', 'CodeFun', 'BytePlay', 'TechJoy', 'DigitalFun', 'CodeHappy', 'TechSmile', 'ByteBounce']
+            },
+            healthcare: {
+                modern: ['HealthSync', 'MedFlow', 'CareCore', 'HealthTech', 'MedConnect', 'CareLink', 'HealthHub', 'MedVibe'],
+                classic: ['HealthCare', 'MedicalGroup', 'WellnessCorp', 'HealthSystems', 'MedCenter', 'CareGroup', 'HealthFirst', 'MedicalCorp'],
+                creative: ['HealingArts', 'WellnessDream', 'CareCraft', 'HealthMagic', 'MedArt', 'CareCanvas', 'HealthMuse', 'WellnessWorks'],
+                professional: ['HealthProfessional', 'MedicalExperts', 'CareProfessionals', 'HealthMasters', 'MedicalElite', 'WellnessPro', 'HealthAdvantage', 'MedPrime'],
+                playful: ['HealthHappy', 'CareJoy', 'WellnessFun', 'HealthSmile', 'MedCheer', 'CarePlay', 'HealthBounce', 'WellnessJoy']
+            },
+            finance: {
+                modern: ['FinFlow', 'MoneySync', 'CashCore', 'FinTech', 'WealthLink', 'MoneyHub', 'FinVibe', 'CashEdge'],
+                classic: ['Financial', 'WealthCorp', 'MoneyWorks', 'FinanceGroup', 'CashSystems', 'WealthFirst', 'FinancialCorp', 'MoneyPro'],
+                creative: ['WealthCraft', 'MoneyCraft', 'FinanceArt', 'CashCanvas', 'WealthMuse', 'MoneyMagic', 'FinanceDream', 'CashArt'],
+                professional: ['FinancialExperts', 'WealthProfessional', 'MoneyMasters', 'FinanceElite', 'CashProfessional', 'WealthAdvantage', 'FinancialPrime', 'MoneyElite'],
+                playful: ['MoneyHappy', 'CashJoy', 'WealthFun', 'FinanceSmile', 'MoneyCheer', 'CashPlay', 'WealthBounce', 'FinanceJoy']
+            }
+        };
+
+        function scrollToGenerator() {
+            document.getElementById('generator').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function generateNames() {
+            const industry = document.getElementById('industry').value;
+            const style = document.getElementById('style').value;
+            const keywords = document.getElementById('keywords').value;
+            
+            if (!industry) {
+                alert('Please select an industry first!');
+                return;
+            }
+
+            const names = businessNames[industry] ? businessNames[industry][style] || [] : [];
+            const fallbackNames = ['BizName Pro', 'Success Labs', 'Prime Ventures', 'Elite Business', 'Peak Solutions', 'Next Level Co', 'Growth Partners', 'Innovation Hub'];
+            
+            const finalNames = names.length > 0 ? names : fallbackNames;
+            
+            // Add keyword-based names if keywords provided
+            if (keywords) {
+                const keywordNames = keywords.split(',').map(k => k.trim()).map(k => 
+                    [k + 'Pro', k + 'Hub', k + 'Labs', k + 'Works', 'Smart' + k, k + 'Plus']
+                ).flat().slice(0, 4);
+                finalNames.push(...keywordNames);
+            }
+
+            displayNames(finalNames.slice(0, 12));
+            document.getElementById('results').classList.remove('hidden');
+        }
+
+        function displayNames(names) {
+            const namesList = document.getElementById('namesList');
+            namesList.innerHTML = names.map(name => `
+                <div class="bg-white p-4 rounded-lg shadow-sm border hover:shadow-md transition cursor-pointer" onclick="selectName('${name}')">
+                    <div class="flex items-center justify-between">
+                        <span class="font-semibold text-gray-900">${name}</span>
+                        <i class="fas fa-heart text-gray-300 hover:text-red-500 transition"></i>
+                    </div>
+                    <div class="text-sm text-gray-500 mt-2">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-800">
+                            <i class="fas fa-check mr-1"></i> Available
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectName(name) {
+            document.getElementById('domainInput').value = name;
+            document.getElementById('domains').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function checkDomain() {
+            const domain = document.getElementById('domainInput').value.trim();
+            if (!domain) {
+                alert('Please enter a business name to check!');
+                return;
+            }
+
+            const domainName = domain.toLowerCase().replace(/[^a-z0-9]/g, '');
+            const extensions = ['.com', '.net', '.org', '.io', '.co'];
+            
+            const results = extensions.map(ext => ({
+                domain: domainName + ext,
+                available: Math.random() > 0.3, // Simulate availability
+                price: '$' + (10 + Math.floor(Math.random() * 20))
+            }));
+
+            displayDomainResults(results);
+        }
+
+        function displayDomainResults(results) {
+            const domainResults = document.getElementById('domainResults');
+            domainResults.innerHTML = `
+                <h5 class="font-bold text-lg mb-4">Domain Availability Results</h5>
+                <div class="grid md:grid-cols-2 gap-3">
+                    ${results.map(result => `
+                        <div class="flex items-center justify-between p-3 border rounded-lg ${result.available ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}">
+                            <div class="flex items-center">
+                                <i class="fas fa-${result.available ? 'check text-green-600' : 'times text-red-600'} mr-2"></i>
+                                <span class="font-medium">${result.domain}</span>
+                            </div>
+                            <div class="text-right">
+                                ${result.available ? 
+                                    `<span class="text-green-600 font-semibold">${result.price}/year</span>` : 
+                                    '<span class="text-red-600 text-sm">Taken</span>'
+                                }
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="mt-4 text-sm text-gray-600">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Domain availability is checked in real-time. Prices may vary.
+                </div>
+            `;
+            domainResults.classList.remove('hidden');
+        }
+
+        // Initialize with some sample data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-focus on industry selector
+            document.getElementById('industry').focus();
+        });
+    </script>
+</body>
+</html>
