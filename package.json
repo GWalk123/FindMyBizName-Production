@@ -1,6 +1,7 @@
 {
   "name": "your-app-name",
   "version": "1.0.0",
+  "type": "module",
   "description": "A description of your project",
   "author": "Your Name",
   "license": "MIT",
