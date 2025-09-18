@@ -11,6 +11,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "node index.js"
+    "render-build": "npm install && npm run build"
   },
   "dependencies": {
         "@vitejs/plugin-vue": "^5.0.4",
